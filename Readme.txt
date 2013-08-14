@@ -93,5 +93,12 @@ for a commit message are:
 When you are done writing the message, you can save and close it. On some
 editors, you have to quit the editor session to return control to git.
 
-If the commit message was received then the commit should succeed.
+If the commit message was received then the commit should succeed. You should see
+a message with something like:
+
+    [master some cryptic string that matches [0-9a-d]+ here]
+    1 file changed, 3 insertions(+)
+    create mode 100644 dummy.txt
+
+To let you know that you've added changes to one file.
 
