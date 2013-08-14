@@ -176,4 +176,44 @@ What does "git checkout" do? It does two things:
 
   2. Second (and this is kind of hidden from view inside the bowels of git) it sets the HEAD to point to the commit that you are checking out.
 
-Basically you have just restore the state of your directory to what it was before.  
+Basically you have just restore the state of your directory to what it was at the time of the previous commit.  So git allows you to store many versions of a set of file. It is 
+similar to the "track changes" feature in word processing
+software except that it is working across an entire set of
+files.
+
+So how do we get back to the version of all of our changes to dummy.txt?  We just checkout the last commit.  If you scroll up in your terminal's history you might find the SHA-1 from the previous git log command. You could use that. But
+ you may have forgotten to make note of it.
+
+ The more general way is to ask git what the current branches exist in the entire set of snapshot histories.
+You can do that with:
+
+   $ git branch
+
+You should see something like:
+
+* (no branch)
+  master
+
+The * indicates where your HEAD is at. A few steps ago, we
+checkout an old commit. We just used its raw, SHA-1 name, and that commit was never designated as a major branch of 
+development in our software project.  So it is not on a branch of its own. That is what the "(no branch)" means.
+
+The default branch in git is master. When we were making commits before we were updating the master branch.  Technically speaking when you "git commit" you:
+
+  1. add the staged snapshot of file to the repository.
+  2. create a SHA-1 name for this new commit.
+  3. note the current HEAD as the parent of this new
+    commit.
+  3. reset the value of HEAD so that it now refers to the new commit.
+  4. advance your current branch so that it now refers to the new commit.
+
+I did not mention this before, but every commit we were doing was advancing the "master" pointer. We were adding
+changes along the master branch, and the bookkeeping for 
+that is nothing more than git keeping track of the fact that
+"master" now points to a more recent commit. 
+
+We don't usually use the SHA-1 when we want to checkout a commit. Usually we just ask for the name of the branch. So:
+
+    $ git checkout master
+
+will return us to where we were before.
