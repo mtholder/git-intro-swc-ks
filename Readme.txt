@@ -145,6 +145,26 @@ Seeing the history of notes that we've made in commit messages is cute, but
 not terribly useful. Fortunately, we can navigate the ancestry graph to 
 restore any snapshot that we are interested in.  The command for this is 
 git checkout, and it takes an argument: the name of the snapshot that you
-want to restore:
+want to restore. First you need to figure out the "name" of the commit that you want to restore. Look at the output of
+git log.  For each commit there are four pieces of information:
+  * the commit's SHA-1, a nasty-looking string of 40 characters. This is a name for the commit;
+  * the committer's name (this is coming from the git config stuff that you did earlier);
+  * the time of "git commit" that created the snapshot; and
+  * the first line of the commit's message.
 
+
+In my output, I see:
+
+commit a0208ab9763f6fba0e7788127cbd7c494d335750
+Author: Mark T. Holder <mtholder@gmail.com>
+Date:   Wed Aug 14 12:10:16 2013 -0500
+
+    Initial commit
+
+If I then run:
+
+    $ git checkout a020
+
+then git will "checkout" that initial commit. Note that I
+can abbreviate the long SHA-1 commit "name" rather than typing the whole thing.
 
