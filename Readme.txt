@@ -165,6 +165,15 @@ If I then run:
 
     $ git checkout a020
 
-then git will "checkout" that initial commit. Note that I
-can abbreviate the long SHA-1 commit "name" rather than typing the whole thing.
+then git will "checkout" that initial commit. Note:
 
+  1. I
+can abbreviate the long SHA-1 commit "name" rather than typing the whole thing.
+  2. You're SHA-1 will be different from mine, so the argument that you give to git checkout will have to differ.
+
+What does "git checkout" do? It does two things:
+  1. For every file that has been added the the current git HEAD, it edits that file in your working directory such that it is identical to it's state at the point of the old commit which you are "checking out." This means that some files may be deleted from your working directory.
+
+  2. Second (and this is kind of hidden from view inside the bowels of git) it sets the HEAD to point to the commit that you are checking out.
+
+Basically you have just restore the state of your directory to what it was before.  
