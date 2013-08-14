@@ -29,7 +29,8 @@ location for a 64-bit machine, you would use:
 http://stackoverflow.com/questions/1634161/how-do-i-use-notepad-or-other-with-msysgit/2486342#2486342 
 for that tip)
 
-On Mac, with TextWrangler if you installed TextWrangler's command line tools then you should have an "edit" command. So you can use the git command:
+On Mac, with TextWrangler if you installed TextWrangler's command line tools
+then you should have an "edit" command. So you can use the git command:
 
     $  git config --global core.editor "edit -w"
 
@@ -101,4 +102,49 @@ a message with something like:
     create mode 100644 dummy.txt
 
 To let you know that you've added changes to one file.
+
+Understanding git
+=================
+What just happened? Your working directory has the current code (just a dummy.txt file
+with whatever text you put in it).  Think of this as a snapshot of your code.  Git
+stores snapshots.  Everytime you commit you are adding a new snapshot to git's 
+repository. Git's repository is just a database of snapshots and information about
+the ancestry of each snapshot. In addition to looking at the files currently stored
+in your directory and previous commits stored in the repository, git also keeps track
+of an intermediate staging area (often referred to as the index in git documentation).
+
+"git add" copies file contents from your working directory into the staging area. Git
+commit copies file contents from the staging area into the repository and stores the
+necessary information about the commit. In particular, it keeps track of the parent of 
+the commit and your commit message.  The parent is simply the name of a previously 
+committed snapshot. In git documentaion, you'll often see people refer to the "HEAD."
+The HEAD is the identifier for the snapshot that will be the parent of you next
+commit. Try running:
+
+    $ echo 'a new last line' >> dummy.txt
+    $ git status
+    $ git diff
+    $ git add dummy.txt
+    $ git status
+    $ git commit -m 'Added a silly new last line'
+    $ git status
+    $ git log
+ 
+Does the output make sense? There are two new commands here:
+
+  * diff shows you the difference between your working directory and the snapshot in the staging area.
+  * log shows you the commit messages for all of snapshots that were stored 
+      in the history of the current HEAD.
+ 
+We don't see "parent" snapshot in the output, but git stores it. It is able
+to present the full history of your work because it traverses the snaphsots
+from the current HEAD back until the intial point at which you added the
+directory to version control (the initial commit has no parent).
+
+Seeing the history of notes that we've made in commit messages is cute, but
+not terribly useful. Fortunately, we can navigate the ancestry graph to 
+restore any snapshot that we are interested in.  The command for this is 
+git checkout, and it takes an argument: the name of the snapshot that you
+want to restore:
+
 
