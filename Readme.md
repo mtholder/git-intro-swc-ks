@@ -273,3 +273,14 @@ First we'll grab an html page from the web and add it to our repo:
   $ curl -o swc.html http://phylo.bio.ku.edu/swc.html
   $ git add swc.html
   $ git commit -m "very simple html" -a
+
+Create a branch to make this look nicer
+
+  $ git branch cosmetics
+  $ git checkout cosmetics
+
+Adding a 
+  style="font-family: Comic Sans MS"
+attribute to the body is lovely.  And you can't beat wrapping the h1 text with a
+  font color="red"
+element.
