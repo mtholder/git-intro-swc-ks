@@ -1,7 +1,10 @@
 Git Introduction
 ================
 
-MTH notes on talk for software carpentry
+MTH notes on talk for software carpentry. Check out http://www.slideshare.net/chacon/git-101-presentation for nice slides and a more in depth treatment.
+
+Initial steps
+-------------
 
 Tell git that you have a directory that should be "versioned"
 
@@ -33,7 +36,6 @@ On Mac, with TextWrangler if you installed TextWrangler's command line tools
 then you should have an "edit" command. So you can use the git command:
 
     $  git config --global core.editor "edit -w"
-
 
 Let's make a change, save it to our file system, and then save it into git.
 
@@ -105,13 +107,26 @@ To let you know that you've added changes to one file.
 
 Understanding git
 =================
-What just happened? Your working directory has the current code (just a dummy.txt file
+What just happened? 
+
+Your working directory has the current code (just a dummy.txt file
 with whatever text you put in it).  Think of this as a snapshot of your code.  Git
-stores snapshots.  Everytime you commit you are adding a new snapshot to git's 
+stores snapshots. 
+
+Every time you commit you are adding a new snapshot to git's 
 repository. Git's repository is just a database of snapshots and information about
-the ancestry of each snapshot. In addition to looking at the files currently stored
+the ancestry of each snapshot. 
+
+In addition to looking at the files currently stored
 in your directory and previous commits stored in the repository, git also keeps track
 of an intermediate staging area (often referred to as the index in git documentation).
+
+http://www.slideshare.net/chacon/git-101-presentation slides 72-74 highlight the three
+places where your code exists in git. 
+
+http://www.slideshare.net/chacon/git-101-presentation slide 111 shows the commands used
+to move new versions of your code that you have saved in your working directory into 
+the git repository.
 
 "git add" copies file contents from your working directory into the staging area. Git
 commit copies file contents from the staging area into the repository and stores the
@@ -141,7 +156,11 @@ to present the full history of your work because it traverses the snaphsots
 from the current HEAD back until the intial point at which you added the
 directory to version control (the initial commit has no parent).
 
-Seeing the history of notes that we've made in commit messages is cute, but
+
+Moving through the revision history
+-----------------------------------
+
+Using git log to see the history of notes that we've made in commit messages is cute, but
 not terribly useful. Fortunately, we can navigate the ancestry graph to 
 restore any snapshot that we are interested in.  The command for this is 
 git checkout, and it takes an argument: the name of the snapshot that you
@@ -151,6 +170,10 @@ git log.  For each commit there are four pieces of information:
   * the committer's name (this is coming from the git config stuff that you did earlier);
   * the time of "git commit" that created the snapshot; and
   * the first line of the commit's message.
+
+http://www.slideshare.net/chacon/git-101-presentation slides 130 - 134 are a nice
+overview (though a bit too detailed for our purposes) of how a commit
+stores this information. The main point is that we can track back through the history
 
 
 In my output, I see:
@@ -217,3 +240,15 @@ We don't usually use the SHA-1 when we want to checkout a commit. Usually we jus
     $ git checkout master
 
 will return us to where we were before.
+
+Graphical views of your git revision history.
+---------------------------------------------
+
+You do not need to run these tool for this workshop, but you may want to look into gitk (gitx on Mac) or SoureTree.
+
+On Linux or gitbash, running gitk from the terminal in a working directory under git control will bring up a GUI that shows the history of a file. On Mac or Windows, you may want to try SourceTree from http://www.sourcetreeapp.com/
+
+http://www.slideshare.net/chacon/git-101-presentation slides 138-146 emphasize how git checkout is how we cause information to flow from the repository to the index and working directory.
+
+Branching
+---------
