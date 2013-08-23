@@ -252,3 +252,24 @@ http://www.slideshare.net/chacon/git-101-presentation slides 138-146 emphasize h
 
 Branching
 ---------
+
+The ability to branch is a core part of git, but we've just introduced a large number of 
+new commands. I would recommend that you watch me do the next steps, but not bother to follow
+along.
+
+http://www.slideshare.net/chacon/git-101-presentation slides 157-172 are a great depiction 
+of the interaction of branching and commits.
+
+The basics are:
+
+  * "git branch" creates a new name for a direction for the path of revision history.
+  * "git checkout" moves the HEAD to a point in the history graph and updates your working directory.
+  * The "git add" and "git commit" commands add a new step onto the end of our growing history of changes
+  * And "git merge" brings in changes from on of the another branch to create a commit that
+  has changes from the current branch and the other branch.
+
+First we'll grab an html page from the web and add it to our repo:
+
+  $ curl -o swc.html http://phylo.bio.ku.edu/swc.html
+  $ git add swc.html
+  $ git commit -m "very simple html" -a
