@@ -274,9 +274,17 @@ First we'll grab an html page from the web and add it to our repo:
   $ git add swc.html
   $ git commit -m "very simple html" -a
 
-Create a branch to make this look nicer
+One developer makes a branch to make this look nicer, one developer wants to add more links
+and another want to make the table terser:
 
   $ git branch cosmetics
+  $ git branch more-links
+  $ git branch terser
+
+Note that running gitk just shows that there are now 4 branch names for the current commit.
+
+The first developer then runs:
+
   $ git checkout cosmetics
 
 Adding a 
@@ -284,3 +292,64 @@ Adding a
 attribute to the body is lovely.  And you can't beat wrapping the h1 text with a
   font color="red"
 element.
+
+Refresh the page in your browser to see the beautiful results
+
+  $ git commit -m "truly beautiful soup" -a
+
+The second developer does this:
+
+  $ git checkout more-links 
+
+She adds an "a" element with an href="http://www.crummy.com/software/BeautifulSoup/" attribute.
+Check out the page in a browser. Note that it has no red text because more-links branched 
+off from master before the cosmetic changes were made.
+
+  $ git commit -m "link to bs4 page" -a
+
+The third developer:
+
+  $ git checkout terser
+
+Removes the word unhelpful word "stuff" and the insulting "interminable"
+
+  $ git commit -m 'removed unnecessary verbiage' -a
+
+Reload the page. 
+
+Once changes are vetted, developers tend to merge them back into master:
+
+  $ git checkout master
+  $ git merge cosmetic
+
+Take a look in the browser and gitk
+
+  $ git merge more-links
+
+Now we have comic sans and the links. Git did the merge for us. Note that it
+did drop us into our text editor to provide a commit message for the merge
+because this was a new combination of code. So it is a new commit.
+
+  $ git merge terser
+
+And oops. this is really the reason I'm showing you all of this. 
+
+The 2 paths of edits both touched the same line. Git refuses to automatically merge.
+It adds conflict markers <<<<<<< ======== and >>>>>>> to the file
+
+We have to manually merge, and then
+
+  $ git add swc.html
+  $ git commit -m "manual merge"
+
+Now we have all of the edits back in the master.
+
+Git clone
+=========
+We use git init to create a new, empty repo.
+
+Often we want to start from someone else's code. git clone copies a repo and checks
+out the master branch:
+
+  
+
