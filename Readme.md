@@ -74,7 +74,7 @@ a set of change. We have done the first step. Adding a file puts it on the
 "stage". To complete the transaction and make a new version of our repository
 we can simply run:
 
-   $ git commit
+    $ git commit
 
 This will drop you enter your text editor so that you can write a message
 explaining what you have done.
@@ -351,5 +351,5 @@ We use git init to create a new, empty repo.
 Often we want to start from someone else's code. git clone copies a repo and checks
 out the master branch:
 
-  
+    $ git clone https://github.com/mtholder/swc-tree-support-ex.git
 
